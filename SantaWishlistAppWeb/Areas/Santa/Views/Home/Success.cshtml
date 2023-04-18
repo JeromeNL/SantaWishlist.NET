@@ -1,0 +1,23 @@
+@model SantaWishlist.Data.Models.SantaForm
+@{
+    ViewData["Title"] = "Success";
+    Layout = "_Layout";
+}
+
+<h1>Goed gewerkt Kerstman!</h1>
+
+<h3>Lijst met alle kinderen</h3>
+@{
+    var tokens = Model.Names.Split(',').ToList();
+
+    <ul class="list-group">
+        @foreach (var name in tokens)
+        {
+            <li class="list-group-item">@name</li>
+        }
+    </ul>
+}
+<h3>wachtwoord: @Model.GivenPassword</h3>
+
+
+<button class="btn btn-primary mt-2" type="button" onclick="location.href='@Url.Action("Index", "Home")'">Ga terug</button>

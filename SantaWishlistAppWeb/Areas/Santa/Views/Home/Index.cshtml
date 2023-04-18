@@ -1,0 +1,37 @@
+@model SantaWishlist.Data.Models.SantaForm
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_Layout";
+}
+
+<h1>Kinderaccounts aanmaken</h1>
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <div class="form-outline">
+
+        @Html.AntiForgeryToken()
+        <br/>
+        @Html.LabelFor(e => e.Names)
+        <br/>
+        @Html.TextAreaFor(e => e.Names, new { @class = "form-control" })
+        <br/>
+        @Html.ValidationMessage("Error", new { @class = "text-danger" })
+        @Html.ValidationMessage("duplicated", new { @class = "text-danger" })
+
+        <br/>
+        @Html.LabelFor(e => e.WellBehaved)
+        <br/>
+        @Html.CheckBoxFor(e => e.WellBehaved, new { @class = "checkbox" })
+        <br/>
+        @Html.LabelFor(e => e.GivenPassword)
+        <br/>
+        @Html.TextBoxFor(e => e.GivenPassword, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.GivenPassword, "", new { @class = "text-danger" })
+        <br/>
+
+    </div>
+    <input type="submit" value="Accounts aanmaken" class="btn btn-primary mt-2"/>
+}

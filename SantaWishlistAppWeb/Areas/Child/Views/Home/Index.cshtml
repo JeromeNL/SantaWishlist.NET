@@ -1,0 +1,37 @@
+@using SantaWishlist.Data.Models.Enums
+@model SantaWishlist.Data.Models.ChildFormViewModel
+
+@{
+    ViewData["Title"] = "Verlanglijstje invullen";
+    Layout = "_Layout";
+}
+
+
+<h1>Welkom, @User.Identity.Name</h1>
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <br/>
+    @Html.LabelFor(e => e.Age)
+    <br/>
+    @Html.TextBoxFor(e => e.Age, new { @class = "form-control" })
+    <br/>
+
+    @Html.LabelFor(e => e.Behaved)
+    <div class="form-check">
+        @foreach (var value in Enum.GetValues(typeof(BehavedEnum)).Cast<BehavedEnum>())
+        {
+            @Html.RadioButtonFor(m => m.Behaved, value, new { @class = "form-check-input" })
+            @value.GetDisplayName()
+            <br/>
+        }
+    </div>
+    @Html.LabelFor(e => e.Explanation)
+    @Html.TextAreaFor(e => e.Explanation, new { @class = "form-control" })
+
+    <input type="submit" value="Ga verder" class="btn btn-primary mt-2"/>
+
+    @Html.ValidationSummary()
+}

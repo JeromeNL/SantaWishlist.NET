@@ -1,0 +1,43 @@
+@using SantaWishlist.Data.Models.Enums
+@model SantaWishlistApp.Areas.Child.Models.GiftChooseViewModel
+@{
+    ViewData["Title"] = "ConfirmPage";
+    Layout = "_Layout";
+}
+
+
+
+<h4>Dankjewel, @User.Identity.Name</h4>
+<h5>Een lijst van de door jou gekozen cadeau's: </h5>
+
+@{
+    var checkedGifts = Model.SelectedGifts;
+    foreach (var (giftCategory, gifts) in checkedGifts)
+    {
+        <h5>@giftCategory</h5>
+        <ul class="list-group">
+            @foreach (var gift in gifts)
+            {
+                <li class="list-group-item">@gift.Gift.Name</li>
+            }
+        </ul>
+    }
+
+    <h5>Overig</h5>
+    <ul class="list-group">
+        @{
+            var tokens = new List<string>();
+            if (Model.OtherWishes != null)
+            {
+                tokens = Model.OtherWishes.Split(',').ToList();
+            }
+        }
+
+        @foreach (var name in tokens)
+        {
+            <li class="list-group-item">@name</li>
+        }
+    </ul>
+    <button class="btn btn-primary mt-2" type="button" onclick="history.go(-1)">Wensenlijst aanpassen</button>
+    <button class="btn btn-primary mt-2" type="button" onclick="location.href='@Url.Action("SendList", new { area = nameof(Role.Child), controller = "Home" })'">Afsluiten</button>
+}

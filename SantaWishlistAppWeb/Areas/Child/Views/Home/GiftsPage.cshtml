@@ -1,0 +1,48 @@
+@model SantaWishlistApp.Areas.Child.Models.GiftChooseViewModel
+@{
+    ViewData["Title"] = "GiftsPage";
+    Layout = "_Layout";
+}
+
+<h3>Bedankt, @User.Identity.Name !</h3>
+
+<p>Het is nu tijd om je cadeaus uit te kiezen.</p>
+<p>
+    Dat je ze op je wensenlijstje zet, betekent natuurlijk niet dat je
+    alles krijgt.
+</p>
+
+@Html.ValidationSummary()
+
+@using (Html.BeginForm("GiftsPage", "Home", FormMethod.Post))
+{
+    // User submitted form
+    @Html.HiddenFor(x => x.ChildFormViewModel.Age)
+    @Html.HiddenFor(x => x.ChildFormViewModel.Behaved)
+    @Html.HiddenFor(x => x.ChildFormViewModel.Explanation)
+
+    <div class="container">
+        <div class="row">
+            @foreach (var (category, gifts) in Model.CategoryGiftsDict)
+            {
+                <div class="col-6 my-2">
+                    <h4>@category</h4>
+
+                    @for (var j = 0; j < gifts.Count; j++)
+                    {
+                        <li class="list-group-item">
+                            @Html.Label(Model.CategoryGiftsDict[category][j].Gift.Name)
+                            @Html.CheckBoxFor(x => x.CategoryGiftsDict[category][j].IsChecked)
+                            @Html.HiddenFor(x => x.CategoryGiftsDict[category][j].Gift.Name)
+                        </li>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+    @Html.LabelFor(e => e.OtherWishes)
+    @Html.TextBoxFor(e => e.OtherWishes)
+
+    <input type="submit" value="Ga verder" class="btn btn-primary mt-2"/>
+}

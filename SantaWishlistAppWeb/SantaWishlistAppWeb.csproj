@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-SantaWishlistApp-a2e62957-e0a0-476b-9042-a37ad3581b32</UserSecretsId>
+    <RootNamespace>SantaWishlistApp</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <InternalsVisibleTo Include="$(AssemblyName).Test" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\ApplicationDbContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SantaWishlist.Data\SantaWishlist.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SantasWishlist.Domain">
+      <HintPath>..\SantaWishlist.Data\Libraries\SantasWishlist.Domain.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Santa\Pages\MainSanta\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Children\Views\MainChild\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Areas\Santa\Views\MainSanta\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Child\Controllers" />
+    <Folder Include="Areas\Child\Views\Home" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Identity\Pages\Account\ResetPassword.cshtml" />
+  </ItemGroup>
+
+ 
+
+</Project>
